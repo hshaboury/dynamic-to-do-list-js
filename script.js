@@ -1,4 +1,4 @@
-// Wait until the DOM is fully loaded
+// Run after the HTML is fully loaded
 document.addEventListener("DOMContentLoaded", function () {
 
     // Select DOM elements
@@ -8,48 +8,45 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to add a new task
     function addTask() {
-        // Get and trim task input
+        // Retrieve and trim input value
         const taskText = taskInput.value.trim();
 
-        // Check if task is empty
+        // Check if input is empty
         if (taskText === "") {
             alert("Please enter a task!");
             return;
         }
 
-        // Create new list item (li)
+        // Create a new li element
         const li = document.createElement("li");
         li.textContent = taskText;
 
-        // Create remove button
+        // Create a remove button
         const removeBtn = document.createElement("button");
         removeBtn.textContent = "Remove";
         removeBtn.className = "remove-btn";
 
-        // Event to remove task
+        // Assign event to remove the li when clicked
         removeBtn.onclick = function () {
             taskList.removeChild(li);
         };
 
-        // Append button to li, then li to task list
+        // Append the button to li, then li to ul
         li.appendChild(removeBtn);
         taskList.appendChild(li);
 
-        // Clear input field
+        // Clear the input field
         taskInput.value = "";
     }
 
-    // Event listener for Add button
+    // Event listener for Add Task button
     addButton.addEventListener("click", addTask);
 
-    // Event listener for Enter key in input
+    // Event listener for Enter key inside input
     taskInput.addEventListener("keypress", function (event) {
         if (event.key === "Enter") {
             addTask();
         }
     });
 
-    // Call addTask when DOM content is loaded (for later persistence)
-    // (Currently does nothing since we don’t use localStorage yet)
-    addTask();
 });
